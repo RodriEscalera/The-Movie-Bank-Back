@@ -11,7 +11,7 @@ router.get("/getAll", (req, res) => {
 
 router.post("/register", (req, res) => {
   const { name, email, password } = req.body;
-
+  if (Object.keys(user).length === 0) return res.sendStatus(400);
   User.create({
     name: name.toLowerCase(),
     email: email.toLowerCase(),
