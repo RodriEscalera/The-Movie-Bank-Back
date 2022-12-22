@@ -17,7 +17,9 @@ app.use(
 );
 app.use(volleyball);
 app.use("/api", routes);
-
+app.use("/", (req, res) => {
+  res.send("Welcome!!");
+});
 db.sync({ force: false })
   .then(() => {
     app.listen(5432, () => {
