@@ -11,9 +11,8 @@ const routes = require("./routes");
 app.use(express.json());
 app.use(
   cors({
-    credentials: true,
     origin: "https://the-movie-bank.vercel.app",
-    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+    credentials: true,
   })
 );
 app.use(volleyball);
