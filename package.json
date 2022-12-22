@@ -25,6 +25,11 @@
     "url": "git+https://github.com/Rodriix99/The-Movie-Bank-Back.git"
   },
   "author": "Rodriix99",
+  "engines": {
+    "node": "16.17.0",
+    "npm": "8.15.0"
+  },
+  "main": "server.js",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Rodriix99/The-Movie-Bank-Back/issues"
