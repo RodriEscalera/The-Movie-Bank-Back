@@ -9,6 +9,10 @@ router.get("/getAll", (req, res) => {
   });
 });
 
+router.get("/test", (req, res) => {
+  res.send("Hello world");
+});
+
 router.post("/register", (req, res) => {
   const { name, email, password } = req.body;
   if (Object.keys(user).length === 0) return res.sendStatus(400);
