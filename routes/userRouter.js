@@ -13,6 +13,11 @@ router.get("/test", (req, res) => {
   res.send("Hello world");
 });
 
+router.post("/testpost", (req, res) => {
+  const { text } = req.body;
+  res.send("Hello bro, your text is " + text);
+});
+
 router.post("/register", (req, res) => {
   const { name, email, password } = req.body;
   if (Object.keys(user).length === 0) return res.sendStatus(400);
