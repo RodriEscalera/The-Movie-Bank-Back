@@ -11,7 +11,7 @@ const routes = require("./routes");
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://the-movie-bank.vercel.app",
     credentials: true,
   })
 );
