@@ -18,7 +18,7 @@ app.use(
 app.use(volleyball);
 app.use("/api", routes);
 
-db.sync({ force: false })
+db.sync({ force: true })
   .then(() => {
     app.listen(5432, () => {
       console.log("Listening on port 5432 🚀");
