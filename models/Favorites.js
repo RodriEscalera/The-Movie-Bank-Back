@@ -5,6 +5,19 @@ class Favorites extends S.Model {}
 
 Favorites.init(
   {
+    movieId: {
+      type: S.INTEGER,
+      allowNull: false,
+    },
+  },
+  { sequelize: db, modelName: "favorites" }
+);
+
+module.exports = Favorites;
+
+/*
+Favorites.init(
+  {
     title: {
       type: S.STRING,
       allowNull: false,
@@ -21,4 +34,5 @@ Favorites.init(
   { sequelize: db, modelName: "favorites" }
 );
 
-module.exports = Favorites;
+
+*/

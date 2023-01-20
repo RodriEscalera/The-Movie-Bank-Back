@@ -3,22 +3,22 @@ const router = express.Router();
 const { Favorites } = require("../models/index");
 
 router.post("/addFav", async (req, res) => {
-  const { title, image, userId, movieId } = req.body;
-  const exists = await Favorites.findOne({ where: { userId, title } });
+  const { userId, movieId } = req.body;
+  const exists = await Favorites.findOne({ where: { userId, movieId } });
   if (exists) return res.send(false);
-  Favorites.create({ title, image, userId, movieId })
+  Favorites.create({ userId, movieId })
     .then((fav) => {
       res.send(fav);
     })
     .catch((err) => {
-      res.send(400);
+      res.sendStatus(400);
     });
 });
 
 router.post("/verifyFav", async (req, res) => {
-  const { userId, title } = req.body;
+  const { userId, movieId } = req.body;
 
-  const data = await Favorites.findOne({ where: { userId, title } });
+  const data = await Favorites.findOne({ where: { userId, movieId } });
 
   if (data) {
     res.send(true);
@@ -27,26 +27,25 @@ router.post("/verifyFav", async (req, res) => {
   }
 });
 
-router.get("/findFavs/:id", (req, res) => {
+router.get("/findFavs/:id", async (req, res) => {
   const { id } = req.params;
-  Favorites.findAll({ where: { userId: id } })
-    .then((favs) => {
-      console.log(favs);
-      res.send(favs);
-    })
-    .catch((err) => {
-      res.send(400);
-    });
+  if (id !== null) {
+    const query = await Favorites.findAll({ where: { userId: id } });
+    console.log(query);
+    res.send(query);
+  } else {
+    res.send(400);
+  }
 });
 
 router.post("/deleteFavs", async (req, res) => {
   console.log(req.body);
-  const { title } = req.body;
+  const { movieId } = req.body;
   const { userId } = req.body;
 
   const deleteFav = await Favorites.destroy({
     where: {
-      title,
+      movieId,
       userId,
     },
   });
@@ -57,3 +56,4 @@ router.post("/deleteFavs", async (req, res) => {
 });
 
 module.exports = router;
+//
