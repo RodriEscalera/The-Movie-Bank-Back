@@ -1,6 +1,6 @@
 const express = require("express");
 const db = require("./config/db");
-const PORT = 5432;
+const PORT = 3001;
 const volleyball = require("volleyball");
 const cors = require("cors");
 const app = express();
@@ -11,7 +11,7 @@ const routes = require("./routes");
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://the-movie-bank.vercel.app",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -37,4 +37,16 @@ const PORT = 5432;
     credentials: true,
   })
 );
+
+
+
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
+
   */

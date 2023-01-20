@@ -18,21 +18,25 @@ router.post("/testpost", (req, res) => {
   res.send("Hello bro, your text is " + text);
 });
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
-  //  if (Object.keys(user).length === 0) return res.sendStatus(400);
-  User.create({
-    name: name.toLowerCase(),
-    email: email.toLowerCase(),
-    password,
-  })
-    .then((usuarioNuevo) => {
-      res.send(usuarioNuevo);
+  const exists = await User.findOne({ where: { email } });
+  if (exists === null) {
+    User.create({
+      name: name.toLowerCase(),
+      email: email.toLowerCase(),
+      password,
     })
-    .catch((err) => {
-      console.log(err);
-      res.send(400);
-    });
+      .then((usuarioNuevo) => {
+        res.send(usuarioNuevo);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(400);
+      });
+  } else {
+    res.send(false);
+  }
 });
 
 router.post("/login", (req, res) => {
