@@ -18,12 +18,23 @@ app.use(
 app.use(volleyball);
 app.use("/api", routes);
 
-db.sync({ force: true })
+db.sync({ force: false })
   .then(() => {
-    app.listen(5432, () => {
-      console.log("Listening on port 5432 🚀");
+    app.listen(PORT, () => {
+      console.log(`Listening on port ${PORT} 🚀`);
     });
   })
   .catch((err) => {
     console.log(err);
   });
+
+/*
+const PORT = 5432;
+  
+  app.use(
+  cors({
+    origin: "https://the-movie-bank.vercel.app",
+    credentials: true,
+  })
+);
+  */
