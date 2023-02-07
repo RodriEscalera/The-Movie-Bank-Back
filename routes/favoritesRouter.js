@@ -3,10 +3,12 @@ const router = express.Router();
 const { Favorites } = require("../models/index");
 
 router.post("/addFav", async (req, res) => {
-  const { userId, movieId } = req.body;
-  const exists = await Favorites.findOne({ where: { userId, movieId } });
+  const { userId, contentId, isMovie } = req.body;
+  const exists = await Favorites.findOne({
+    where: { userId, contentId, isMovie },
+  });
   if (exists) return res.send(false);
-  Favorites.create({ userId, movieId })
+  Favorites.create({ userId, contentId, isMovie })
     .then((fav) => {
       res.send(fav);
     })
@@ -16,9 +18,10 @@ router.post("/addFav", async (req, res) => {
 });
 
 router.post("/verifyFav", async (req, res) => {
-  const { userId, movieId } = req.body;
-
-  const data = await Favorites.findOne({ where: { userId, movieId } });
+  const { userId, contentId, isMovie } = req.body;
+  const data = await Favorites.findOne({
+    where: { userId, contentId, isMovie },
+  });
 
   if (data) {
     res.send(true);
@@ -31,7 +34,7 @@ router.get("/findFavs/:id", async (req, res) => {
   const { id } = req.params;
   if (id !== null) {
     const query = await Favorites.findAll({ where: { userId: id } });
-    console.log(query);
+    //console.log(query);
     res.send(query);
   } else {
     res.send(400);
@@ -39,18 +42,20 @@ router.get("/findFavs/:id", async (req, res) => {
 });
 
 router.post("/deleteFavs", async (req, res) => {
-  console.log(req.body);
-  const { movieId } = req.body;
+  //console.log(req.body);
+  const { contentId } = req.body;
   const { userId } = req.body;
+  const { isMovie } = req.body;
 
   const deleteFav = await Favorites.destroy({
     where: {
-      movieId,
+      contentId,
       userId,
+      isMovie,
     },
   });
 
-  console.log(deleteFav);
+  //console.log(deleteFav);
   if (!deleteFav) return res.sendStatus(400);
   res.sendStatus(200);
 });

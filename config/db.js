@@ -1,5 +1,4 @@
 const Sequelize = require("sequelize");
-
 const db = new Sequelize(
   "the_movie_bank",
   "the_movie_bank_user",

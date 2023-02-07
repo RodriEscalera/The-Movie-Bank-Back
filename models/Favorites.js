@@ -5,8 +5,12 @@ class Favorites extends S.Model {}
 
 Favorites.init(
   {
-    movieId: {
+    contentId: {
       type: S.INTEGER,
+      allowNull: false,
+    },
+    isMovie: {
+      type: S.BOOLEAN,
       allowNull: false,
     },
   },
