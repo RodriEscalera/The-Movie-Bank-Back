@@ -20,7 +20,7 @@ app.use(
 app.use(volleyball);
 app.use("/api", routes);
 
-db.sync({ force: false })
+db.sync({ force: true })
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Listening on port ${PORT} 🚀`);
